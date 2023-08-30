@@ -1,0 +1,7 @@
+project:
+  title: "slide-estat-with-r"
+
+editor: visual
+
+execute:
+  freeze: auto

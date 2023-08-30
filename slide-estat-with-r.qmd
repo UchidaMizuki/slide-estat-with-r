@@ -1,0 +1,251 @@
+---
+title: "e-Stat🤝R"
+format: 
+  revealjs
+---
+
+## [e-Stat](https://www.e-stat.go.jp)とは❓
+
+-   日本の政府統計ポータルサイト
+-   多くの統計データが検索・閲覧・ダウンロードできる
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_001_1.png){fig-align="center"}
+
+## e-Statの使い方📌
+
+### 1. データベースを検索🔎
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_003.png){fig-align="center"}
+
+## e-Statの使い方📌
+
+### 2. データベースを選択👆
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_039.png){fig-align="center"}
+
+## e-Statの使い方📌
+
+### 3. データ項目を選択✅
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_040.png){fig-align="center"}
+
+## e-Statの使い方📌
+
+### 4. データをダウンロード💾
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/dbview01_1.png){fig-align="center"}
+
+## e-Stat🤝R {auto-animate="true"}
+
+### [e-Stat API](https://www.e-stat.go.jp/api/)
+
+Rからもe-Statを利用可能⏩[estatapi](https://yutannihilation.github.io/estatapi/)パッケージ📦
+
+1.  データベースを検索🔎
+2.  データベースを選択👆
+3.  データ項目を選択✅
+4.  データをダウンロード💾
+
+## e-Stat🤝R {auto-animate="true"}
+
+### [e-Stat API](https://www.e-stat.go.jp/api/)
+
+Step 3以降のデータ抽出・整形がやや難しい😖
+
+3.  データ項目を選択✅
+4.  データをダウンロード💾
+
+::: {.fragment .fade-in}
+### [jpstat](https://uchidamizuki.github.io/jpstat/)📦
+
+-   dplyr📦とパイプ（`|>, %>%`）でデータ抽出可能👍
+-   統計データ収集の効率性・再現性向上👍
+:::
+
+## jpstat📦の使い方📌
+
+### 1. アプリケーションIDを設定[^1]
+
+[^1]: 事前に[利用規約](https://www.e-stat.go.jp/api/api-info/api-guide)をご確認ください
+
+-   e-Stat APIの利用には[ユーザ登録](https://www.e-stat.go.jp/mypage/user/preregister)が必要
+-   [利用ガイド](https://www.e-stat.go.jp/api/api-info/api-guide)に従ってアプリケーションIDを取得
+
+```{r}
+library(tidyverse)
+library(jpstat)
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "8-9"
+
+# パッケージのインストール（必要なら）・読み込み
+if (!require("tidyverse")) install.packages("tidyverse")
+if (!require("jpstat")) install.packages("jpstat")
+
+library(tidyverse)
+library(jpstat)
+
+# グローバル変数にアプリケーションIDを追加
+Sys.setenv(ESTAT_API_KEY = "あなたのアプリケーションID")
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 2. データ項目を取得[^2]
+
+[^2]: メタ情報と呼ばれています
+
+[家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^3]
+
+[^3]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEと同様．ただし，ここでは2023年データを使用．
+
+```{r}
+#| echo: true
+
+estat(statsDataId = "0003343671") # statsDataId: URL等に記載されている統計表ID
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 3. データ項目を抽出
+
+`activate(), filter()`でチョコレート関連品目を抽出
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2-3"
+
+estat(statsDataId = "0003343671") |> 
+  activate(cat01) |> 
+  filter(str_detect(name, "チョコレート"))
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 3. データ項目を抽出
+
+複数の抽出処理をパイプ（`|>, %>%`）でつなげられる
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "5-9"
+
+estat(statsDataId = "0003343671") |> 
+  activate(cat01) |> 
+  filter(str_detect(name, "チョコレート")) |> 
+  
+  activate(area) |> 
+  filter(name == "全国") |> 
+  
+  activate(time) |> 
+  filter(str_detect(name, "2023年[1-3]月"))
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 4. データをダウンロード
+
+`collect()`でデータをダウンロード
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1,11"
+
+chocolate <- estat(statsDataId = "0003343671") |> 
+  activate(cat01) |> 
+  filter(str_detect(name, "チョコレート")) |> 
+  
+  activate(area) |> 
+  filter(name == "全国") |> 
+  
+  activate(time) |> 
+  filter(str_detect(name, "2023年[1-3]月")) |> 
+  
+  collect(n = "金額") # `n`で収集データの列名を指定
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 4. データをダウンロード
+
+このままでは列名がわかりづらく不要な列が多い😖
+
+```{r}
+#| echo: true
+
+head(chocolate)
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 5. データを整形
+
+`rekey(), select()`で収集データの列名を指定できる
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2,4,7,9,12"
+
+chocolate <- estat(statsDataId = "0003343671") |> 
+  activate(tab) |> select() |> # 何も`select()`しない場合は列名が消える
+    
+  activate(cat01) |> rekey("品目分類") |> select(name) |> 
+  filter(str_detect(name, "チョコレート")) |> 
+  
+  activate(cat02) |> rekey("世帯区分") |> select(name) |>
+  
+  activate(area) |> rekey("地域区分") |> select(name) |>
+  filter(name == "全国") |> 
+  
+  activate(time) |> rekey("月次") |> select(name) |>
+  filter(str_detect(name, "2023年[1-3]月")) |> 
+  
+  collect(n = "金額")
+```
+
+## jpstat📦の使い方📌 {auto-animate="true"}
+
+### 5. データを整形
+
+列名がわかりやすくなり不要な列が消えた👍
+
+```{r}
+#| echo: true
+
+head(chocolate)
+```
+
+## まとめ📋
+
+-   jpstat📦でe-Statデータの収集を簡単に
+-   他の統計APIにも対応するかも
+    -   実験的にRESAS APIなどにも対応
+-   IssueやPull Requestは[UchidaMizuki/jpstat](https://github.com/UchidaMizuki/jpstat)まで
+
+## Enjoy🍫
+
+余談：2月はチョコレート消費が増えることがわかった❗
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+chocolate |> 
+  mutate(世帯区分_name = 世帯区分_name |> 
+           str_remove("（2000年～）$") |> 
+           as_factor(),
+         金額 = parse_number(金額)) |> 
+  ggplot(aes(月次_name, 金額,
+             fill = 世帯区分_name)) +
+  geom_col(position = "dodge") +
+  scale_x_discrete(NULL) +
+  scale_y_continuous("1世帯あたり金額［円］",
+                     labels = scales::label_comma()) +
+  scale_fill_brewer("世帯区分",
+                    palette = "Paired") +
+  facet_wrap(~ 品目分類_name)
+```

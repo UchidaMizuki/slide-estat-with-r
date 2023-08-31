@@ -1,5 +1,9 @@
 ---
 title: "e-Stat🤝R"
+subtitle: "Tokyo.R #108"
+author: UchidaMizuki
+date: "2023-09-02"
+footer: <https://github.com/UchidaMizuki/jpstat>
 format: 
   revealjs
 ---
@@ -56,6 +60,8 @@ Step 3以降のデータ抽出・整形がやや難しい😖
 4.  データをダウンロード💾
 
 ::: {.fragment .fade-in}
+⏬
+
 ### [jpstat](https://uchidamizuki.github.io/jpstat/)📦
 
 -   dplyr📦とパイプ（`|>, %>%`）でデータ抽出可能👍
@@ -96,11 +102,11 @@ Sys.setenv(ESTAT_API_KEY = "あなたのアプリケーションID")
 
 ### 2. データ項目を取得[^2]
 
-[^2]: メタ情報と呼ばれています
+[^2]: メタ情報と呼ばれています．
 
 [家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^3]
 
-[^3]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEと同様．ただし，ここでは2023年データを使用．
+[^3]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEを参考に．ただし，ここでは2023年データを使用．
 
 ```{r}
 #| echo: true

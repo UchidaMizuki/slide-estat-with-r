@@ -408,7 +408,7 @@ UchidaMizuki
 <h2><a href="https://www.e-stat.go.jp">e-Stat</a>とは❓</h2>
 <ul>
 <li>日本の政府統計ポータルサイト</li>
-<li>多くの統計データが検索・閲覧・ダウンロードできる</li>
+<li>多くの統計データを検索・閲覧・取得可能👍</li>
 </ul>
 
 <img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_001_1.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
@@ -434,35 +434,51 @@ UchidaMizuki
 <img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/dbview01_1.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
 <section id="e-statr" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">e-Stat🤝R</h2>
+<p>Rでもe-Statの機能を利用したい❗</p>
+<div class="fragment fade-in">
+<div style="text-align: center;">
+<p>⏬</p>
+</div>
 <h3 id="e-stat-api"><a href="https://www.e-stat.go.jp/api/">e-Stat API</a></h3>
-<p>Rからもe-Statを利用可能⏩<a href="https://yutannihilation.github.io/estatapi/">estatapi</a>パッケージ📦</p>
+<p>Rでもe-Statの機能を利用できる👍</p>
+</div>
+</section>
+<section id="e-statr-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">e-Stat🤝R</h2>
+<h3 id="e-stat-api-1"><a href="https://www.e-stat.go.jp/api/">e-Stat API</a></h3>
+<p>Rでもe-Statの機能を利用できる👍</p>
 <ol type="1">
 <li>データベースを検索🔎</li>
 <li>データベースを選択👆</li>
 <li>データ項目を選択✅</li>
 <li>データをダウンロード💾</li>
 </ol>
-</section>
-<section id="e-statr-1" class="slide level2" data-auto-animate="true">
+
+<aside><div>
+<p><a href="https://yutannihilation.github.io/estatapi/">estatapi</a>📦ではこれらの機能が提供されています．</p>
+</div></aside></section>
+<section id="e-statr-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">e-Stat🤝R</h2>
-<h3 id="e-stat-api-1"><a href="https://www.e-stat.go.jp/api/">e-Stat API</a></h3>
-<p>Step 3以降のデータ抽出・整形がやや難しい😖</p>
+<h3 id="e-stat-api-2"><a href="https://www.e-stat.go.jp/api/">e-Stat API</a></h3>
+<p>課題：Webサイトと比べてStep 3～が難しい😖</p>
 <ol start="3" type="1">
 <li>データ項目を選択✅</li>
 <li>データをダウンロード💾</li>
 </ol>
 <div class="fragment fade-in">
+<div style="text-align: center;">
 <p>⏬</p>
+</div>
 <h3 id="jpstat"><a href="https://uchidamizuki.github.io/jpstat/">jpstat</a>📦</h3>
 <ul>
-<li>dplyr📦とパイプ（<code>|&gt;, %&gt;%</code>）でデータ抽出可能👍</li>
-<li>統計データ収集の効率性・再現性向上👍</li>
+<li>効率的な統計データ抽出・取得・整形に特化👍</li>
+<li>dplyr📦とパイプ（<code>|&gt;, %&gt;%</code>）を利用可能👍</li>
 </ul>
 </div>
 </section>
 <section id="jpstatの使い方" class="slide level2">
 <h2>jpstat📦の使い方📌</h2>
-<h3 id="アプリケーションidを設定1">1. アプリケーションIDを設定<sup>1</sup></h3>
+<h3 id="アプリケーションidを設定">1. アプリケーションIDを設定</h3>
 <ul>
 <li>e-Stat APIの利用には<a href="https://www.e-stat.go.jp/mypage/user/preregister">ユーザ登録</a>が必要</li>
 <li><a href="https://www.e-stat.go.jp/api/api-info/api-guide">利用ガイド</a>に従ってアプリケーションIDを取得</li>
@@ -478,10 +494,13 @@ UchidaMizuki
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># グローバル変数にアプリケーションIDを追加</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">Sys.setenv</span>(<span class="at">ESTAT_API_KEY =</span> <span class="st">"あなたのアプリケーションID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>事前に<a href="https://www.e-stat.go.jp/api/api-info/api-guide">利用規約</a>をご確認ください</p></li></ol></aside></section>
+
+<aside><div>
+<p>事前に<a href="https://www.e-stat.go.jp/api/api-info/api-guide">利用規約</a>をご確認ください</p>
+</div></aside></section>
 <section id="jpstatの使い方-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
-<h3 id="データ項目を取得2">2. データ項目を取得<sup>1</sup></h3>
+<h3 id="データ項目を取得3">2. データ項目を取得<sup>1</sup></h3>
 <p><a href="https://www.e-stat.go.jp/dbview?sid=0003343671">家計調査</a>データベースを対象<sup>2</sup></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href="#cb2-1"></a><span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="co"># statsDataId: URL等に記載されている統計表ID</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -495,11 +514,11 @@ UchidaMizuki
 # Please `activate()`.</code></pre>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn2"><p>メタ情報と呼ばれています．</p></li><li id="fn3"><p><a href="https://yutannihilation.github.io/estatapi/">estatapi</a>📦のREADMEを参考に．ただし，ここでは2023年データを使用．</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>正式にはメタ情報と呼ばれています．</p></li><li id="fn2"><p><a href="https://yutannihilation.github.io/estatapi/">estatapi</a>📦のREADMEを参考にしました．ただし，ここでは2023年データを使用．</p></li></ol></aside></section>
 <section id="jpstatの使い方-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データ項目を抽出">3. データ項目を抽出</h3>
-<p><code>activate(), filter()</code>でチョコレート関連品目を抽出</p>
+<p><code>activate(), filter()</code>でチョコレート関連の品目を抽出</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="2-3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a><span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb4-2" class="hljs-ln-code"><a href="#cb4-2"></a>  <span class="fu">activate</span>(cat01) <span class="sc">|&gt;</span> </span>
@@ -522,7 +541,7 @@ UchidaMizuki
 <section id="jpstatの使い方-3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データ項目を抽出-1">3. データ項目を抽出</h3>
-<p>複数の抽出処理をパイプ（<code>|&gt;, %&gt;%</code>）でつなげられる</p>
+<p>他の抽出処理をパイプ（<code>|&gt;, %&gt;%</code>）でつなげられる</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="5-9"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb6-1" class="hljs-ln-code"><a href="#cb6-1"></a><span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb6-2" class="hljs-ln-code"><a href="#cb6-2"></a>  <span class="fu">activate</span>(cat01) <span class="sc">|&gt;</span> </span>
@@ -538,7 +557,7 @@ UchidaMizuki
 <section id="jpstatの使い方-4" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データをダウンロード-1">4. データをダウンロード</h3>
-<p><code>collect()</code>でデータをダウンロード</p>
+<p><code>collect()</code>で統計データをダウンロード</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="1,11"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb7-1" class="hljs-ln-code"><a href="#cb7-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb7-2" class="hljs-ln-code"><a href="#cb7-2"></a>  <span class="fu">activate</span>(cat01) <span class="sc">|&gt;</span> </span>
@@ -559,7 +578,7 @@ UchidaMizuki
 <section id="jpstatの使い方-5" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データをダウンロード-2">4. データをダウンロード</h3>
-<p>このままでは列名がわかりづらく不要な列が多い😖</p>
+<p>課題：列名が難解で不要な列が多い😖⏩データ整形必要</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb9-1" class="hljs-ln-code"><a href="#cb9-1"></a><span class="fu">head</span>(chocolate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -585,7 +604,7 @@ UchidaMizuki
 <p><code>rekey(), select()</code>で収集データの列名を指定できる</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11" data-code-line-numbers="2,4,7,9,12"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb11-1" class="hljs-ln-code"><a href="#cb11-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb11-2" class="hljs-ln-code"><a href="#cb11-2"></a>  <span class="fu">activate</span>(tab) <span class="sc">|&gt;</span> <span class="fu">select</span>() <span class="sc">|&gt;</span> <span class="co"># 何も`select()`しない場合は列名が消える</span></span>
+<span id="cb11-2" class="hljs-ln-code"><a href="#cb11-2"></a>  <span class="fu">activate</span>(tab) <span class="sc">|&gt;</span> <span class="fu">select</span>() <span class="sc">|&gt;</span> <span class="co"># 何も`select()`しない場合は列が消える</span></span>
 <span id="cb11-3" class="hljs-ln-code"><a href="#cb11-3"></a>    </span>
 <span id="cb11-4" class="hljs-ln-code"><a href="#cb11-4"></a>  <span class="fu">activate</span>(cat01) <span class="sc">|&gt;</span> <span class="fu">rekey</span>(<span class="st">"品目分類"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(name) <span class="sc">|&gt;</span> </span>
 <span id="cb11-5" class="hljs-ln-code"><a href="#cb11-5"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">"チョコレート"</span>)) <span class="sc">|&gt;</span> </span>
@@ -626,17 +645,17 @@ UchidaMizuki
 <section id="まとめ" class="slide level2">
 <h2>まとめ📋</h2>
 <ul>
-<li>jpstat📦でe-Statデータの収集を簡単に</li>
-<li>他の統計APIにも対応するかも
+<li><a href="https://github.com/UchidaMizuki/jpstat">jpstat</a>📦で統計データ収集が楽しく簡単に</li>
+<li>e-Stat以外の統計APIにも対応するかも
 <ul>
-<li>実験的にRESAS APIなどにも対応</li>
+<li>現在，実験的にRESAS APIなどに対応</li>
 </ul></li>
-<li>IssueやPull Requestは<a href="https://github.com/UchidaMizuki/jpstat">UchidaMizuki/jpstat</a>まで</li>
+<li>要望やバグ報告は<a href="https://github.com/UchidaMizuki/jpstat/issues">UchidaMizuki/jpstat/issues</a>まで</li>
 </ul>
 </section>
 <section id="enjoy" class="slide level2">
 <h2>Enjoy🍫</h2>
-<p>余談：2月はチョコレート消費が増えることがわかった❗</p>
+<p>余談：2月はチョコレート消費が増えることがわかった！</p>
 <div class="cell">
 <details>
 <summary>Code</summary>

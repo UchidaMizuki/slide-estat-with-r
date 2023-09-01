@@ -11,7 +11,7 @@ format:
 ## [e-Stat](https://www.e-stat.go.jp)とは❓
 
 -   日本の政府統計ポータルサイト
--   多くの統計データが検索・閲覧・ダウンロードできる
+-   多くの統計データを検索・閲覧・取得可能👍
 
 ![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_001_1.png){fig-align="center"}
 
@@ -41,38 +41,55 @@ format:
 
 ## e-Stat🤝R {auto-animate="true"}
 
+Rでもe-Statの機能を利用したい❗
+
+::: {.fragment .fade-in}
+::: {style="text-align: center;"}
+⏬
+:::
 ### [e-Stat API](https://www.e-stat.go.jp/api/)
 
-Rからもe-Statを利用可能⏩[estatapi](https://yutannihilation.github.io/estatapi/)パッケージ📦
+Rでもe-Statの機能を利用できる👍
+:::
+
+## e-Stat🤝R {auto-animate="true"}
+
+### [e-Stat API](https://www.e-stat.go.jp/api/)
+
+Rでもe-Statの機能を利用できる👍
 
 1.  データベースを検索🔎
 2.  データベースを選択👆
 3.  データ項目を選択✅
 4.  データをダウンロード💾
 
+::: aside
+[estatapi](https://yutannihilation.github.io/estatapi/)📦ではこれらの機能が提供されています．
+:::
+
 ## e-Stat🤝R {auto-animate="true"}
 
 ### [e-Stat API](https://www.e-stat.go.jp/api/)
 
-Step 3以降のデータ抽出・整形がやや難しい😖
+課題：Webサイトと比べてStep 3～が難しい😖
 
 3.  データ項目を選択✅
 4.  データをダウンロード💾
 
 ::: {.fragment .fade-in}
+::: {style="text-align: center;"}
 ⏬
+:::
 
 ### [jpstat](https://uchidamizuki.github.io/jpstat/)📦
 
--   dplyr📦とパイプ（`|>, %>%`）でデータ抽出可能👍
--   統計データ収集の効率性・再現性向上👍
+-   効率的な統計データ抽出・取得・整形に特化👍
+-   dplyr📦とパイプ（`|>, %>%`）を利用可能👍
 :::
 
 ## jpstat📦の使い方📌
 
-### 1. アプリケーションIDを設定[^1]
-
-[^1]: 事前に[利用規約](https://www.e-stat.go.jp/api/api-info/api-guide)をご確認ください
+### 1. アプリケーションIDを設定
 
 -   e-Stat APIの利用には[ユーザ登録](https://www.e-stat.go.jp/mypage/user/preregister)が必要
 -   [利用ガイド](https://www.e-stat.go.jp/api/api-info/api-guide)に従ってアプリケーションIDを取得
@@ -98,15 +115,19 @@ library(jpstat)
 Sys.setenv(ESTAT_API_KEY = "あなたのアプリケーションID")
 ```
 
+::: aside
+事前に[利用規約](https://www.e-stat.go.jp/api/api-info/api-guide)をご確認ください
+:::
+
 ## jpstat📦の使い方📌 {auto-animate="true"}
 
-### 2. データ項目を取得[^2]
+### 2. データ項目を取得[^3]
 
-[^2]: メタ情報と呼ばれています．
+[^3]: 正式にはメタ情報と呼ばれています．
 
-[家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^3]
+[家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^4]
 
-[^3]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEを参考に．ただし，ここでは2023年データを使用．
+[^4]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEを参考にしました．ただし，ここでは2023年データを使用．
 
 ```{r}
 #| echo: true
@@ -118,7 +139,7 @@ estat(statsDataId = "0003343671") # statsDataId: URL等に記載されている�
 
 ### 3. データ項目を抽出
 
-`activate(), filter()`でチョコレート関連品目を抽出
+`activate(), filter()`でチョコレート関連の品目を抽出
 
 ```{r}
 #| echo: true
@@ -133,7 +154,7 @@ estat(statsDataId = "0003343671") |>
 
 ### 3. データ項目を抽出
 
-複数の抽出処理をパイプ（`|>, %>%`）でつなげられる
+他の抽出処理をパイプ（`|>, %>%`）でつなげられる
 
 ```{r}
 #| echo: true
@@ -155,7 +176,7 @@ estat(statsDataId = "0003343671") |>
 
 ### 4. データをダウンロード
 
-`collect()`でデータをダウンロード
+`collect()`で統計データをダウンロード
 
 ```{r}
 #| echo: true
@@ -178,13 +199,15 @@ chocolate <- estat(statsDataId = "0003343671") |>
 
 ### 4. データをダウンロード
 
-このままでは列名がわかりづらく不要な列が多い😖
+課題：列名が難解で不要な列が多い😖⏩データ整形必要
 
 ```{r}
 #| echo: true
 
 head(chocolate)
 ```
+
+
 
 ## jpstat📦の使い方📌 {auto-animate="true"}
 
@@ -197,7 +220,7 @@ head(chocolate)
 #| code-line-numbers: "2,4,7,9,12"
 
 chocolate <- estat(statsDataId = "0003343671") |> 
-  activate(tab) |> select() |> # 何も`select()`しない場合は列名が消える
+  activate(tab) |> select() |> # 何も`select()`しない場合は列が消える
     
   activate(cat01) |> rekey("品目分類") |> select(name) |> 
   filter(str_detect(name, "チョコレート")) |> 
@@ -227,14 +250,14 @@ head(chocolate)
 
 ## まとめ📋
 
--   jpstat📦でe-Statデータの収集を簡単に
--   他の統計APIにも対応するかも
-    -   実験的にRESAS APIなどにも対応
--   IssueやPull Requestは[UchidaMizuki/jpstat](https://github.com/UchidaMizuki/jpstat)まで
+-   [jpstat](https://github.com/UchidaMizuki/jpstat)📦で統計データ収集が楽しく簡単に
+-   e-Stat以外の統計APIにも対応するかも
+    -   現在，実験的にRESAS APIなどに対応
+-   要望やバグ報告は[UchidaMizuki/jpstat/issues](https://github.com/UchidaMizuki/jpstat/issues)まで
 
 ## Enjoy🍫
 
-余談：2月はチョコレート消費が増えることがわかった❗
+余談：2月はチョコレート消費が増えることがわかった！
 
 ```{r}
 #| echo: true

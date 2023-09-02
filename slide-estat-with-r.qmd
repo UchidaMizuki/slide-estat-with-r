@@ -41,37 +41,28 @@ format:
 
 ## e-Stat🤝R {auto-animate="true"}
 
-Rでもe-Statの機能を利用したい❗
+### Rでもe-Statの機能を利用したい❗
 
 ::: {.fragment .fade-in}
 ::: {style="text-align: center;"}
 ⏬
 :::
-### [e-Stat API](https://www.e-stat.go.jp/api/)
-
-Rでもe-Statの機能を利用できる👍
-:::
-
-## e-Stat🤝R {auto-animate="true"}
 
 ### [e-Stat API](https://www.e-stat.go.jp/api/)
 
-Rでもe-Statの機能を利用できる👍
+Rでもe-Statの機能を利用できる⏩[estatapi](https://yutannihilation.github.io/estatapi/)📦も
 
 1.  データベースを検索🔎
 2.  データベースを選択👆
 3.  データ項目を選択✅
 4.  データをダウンロード💾
-
-::: aside
-[estatapi](https://yutannihilation.github.io/estatapi/)📦ではこれらの機能が提供されています．
 :::
 
 ## e-Stat🤝R {auto-animate="true"}
 
 ### [e-Stat API](https://www.e-stat.go.jp/api/)
 
-課題：Webサイトと比べてStep 3～が難しい😖
+ただしWeb版と比べてStep 3～が煩雑になりがち😖
 
 3.  データ項目を選択✅
 4.  データをダウンロード💾
@@ -139,7 +130,7 @@ estat(statsDataId = "0003343671") # statsDataId: URL等に記載されている�
 
 ### 3. データ項目を抽出
 
-`activate(), filter()`でチョコレート関連の品目を抽出
+`activate(), filter()`でチョコレート関連品目を抽出
 
 ```{r}
 #| echo: true
@@ -199,7 +190,7 @@ chocolate <- estat(statsDataId = "0003343671") |>
 
 ### 4. データをダウンロード
 
-課題：列名が難解で不要な列が多い😖⏩データ整形必要
+列名が難解で列数が多い😖⏩データ整形したい❗
 
 ```{r}
 #| echo: true
@@ -251,9 +242,13 @@ head(chocolate)
 ## まとめ📋
 
 -   [jpstat](https://github.com/UchidaMizuki/jpstat)📦で統計データ収集が楽しく簡単に
+
+::: {.fragment .fade-in}
 -   e-Stat以外の統計APIにも対応するかも
     -   現在，実験的にRESAS APIなどに対応
 -   要望やバグ報告は[UchidaMizuki/jpstat/issues](https://github.com/UchidaMizuki/jpstat/issues)まで
+
+:::
 
 ## Enjoy🍫
 

@@ -23,9 +23,15 @@ format:
 
 ## e-Statの使い方📌
 
-### 2. データベースを選択👆
+### 2. データベースを選択👆{auto-animate="true"}
 
 ![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_039.png){fig-align="center"}
+
+## e-Statの使い方📌
+
+### 2. データベースを選択👆
+
+![画像出典：e-Stat](https://www.e-stat.go.jp/sites/default/files/inline-images/image200_20.png){fig-align="center"}
 
 ## e-Statの使い方📌
 
@@ -112,13 +118,13 @@ Sys.setenv(ESTAT_API_KEY = "あなたのアプリケーションID")
 
 ## jpstat📦の使い方📌 {auto-animate="true"}
 
-### 2. データ項目を取得[^3]
+### 2. データ項目を取得[^1]
 
-[^3]: 正式にはメタ情報と呼ばれています．
+[^1]: 正式にはメタ情報と呼ばれています．
 
-[家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^4]
+[2023年家計調査](https://www.e-stat.go.jp/dbview?sid=0003343671)データベースを対象[^2]
 
-[^4]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEを参考にしました．ただし，ここでは2023年データを使用．
+[^2]: [estatapi](https://yutannihilation.github.io/estatapi/)📦のREADMEを参考にしました．
 
 ```{r}
 #| echo: true
@@ -198,13 +204,11 @@ chocolate <- estat(statsDataId = "0003343671") |>
 head(chocolate)
 ```
 
-
-
 ## jpstat📦の使い方📌 {auto-animate="true"}
 
 ### 5. データを整形
 
-`rekey(), select()`で収集データの列名を指定できる
+`rekey(), select()`で収集データの列を指定できる
 
 ```{r}
 #| echo: true
@@ -247,7 +251,6 @@ head(chocolate)
 -   e-Stat以外の統計APIにも対応するかも
     -   現在，実験的にRESAS APIなどに対応
 -   要望やバグ報告は[UchidaMizuki/jpstat/issues](https://github.com/UchidaMizuki/jpstat/issues)まで
-
 :::
 
 ## Enjoy🍫

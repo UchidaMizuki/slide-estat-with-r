@@ -419,15 +419,20 @@ UchidaMizuki
 <img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_003.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
 <section id="e-statの使い方-1" class="slide level2">
 <h2>e-Statの使い方📌</h2>
-<h3 id="データベースを選択">2. データベースを選択👆</h3>
+<h3 data-auto-animate="true" id="データベースを選択">2. データベースを選択👆</h3>
 
 <img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_039.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
 <section id="e-statの使い方-2" class="slide level2">
 <h2>e-Statの使い方📌</h2>
+<h3 id="データベースを選択-1">2. データベースを選択👆</h3>
+
+<img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/image200_20.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
+<section id="e-statの使い方-3" class="slide level2">
+<h2>e-Statの使い方📌</h2>
 <h3 id="データ項目を選択">3. データ項目を選択✅</h3>
 
 <img data-src="https://www.e-stat.go.jp/sites/default/files/inline-images/e-stat_040.png" class="r-stretch quarto-figure-center"><p class="caption">画像出典：e-Stat</p></section>
-<section id="e-statの使い方-3" class="slide level2">
+<section id="e-statの使い方-4" class="slide level2">
 <h2>e-Statの使い方📌</h2>
 <h3 id="データをダウンロード">4. データをダウンロード💾</h3>
 
@@ -492,8 +497,8 @@ UchidaMizuki
 </div></aside></section>
 <section id="jpstatの使い方-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
-<h3 id="データ項目を取得3">2. データ項目を取得<sup>1</sup></h3>
-<p><a href="https://www.e-stat.go.jp/dbview?sid=0003343671">家計調査</a>データベースを対象<sup>2</sup></p>
+<h3 id="データ項目を取得1">2. データ項目を取得<sup>1</sup></h3>
+<p><a href="https://www.e-stat.go.jp/dbview?sid=0003343671">2023年家計調査</a>データベースを対象<sup>2</sup></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href="#cb2-1"></a><span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="co"># statsDataId: URL等に記載されている統計表ID</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -506,7 +511,7 @@ UchidaMizuki
 # Please `activate()`.</code></pre>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>正式にはメタ情報と呼ばれています．</p></li><li id="fn2"><p><a href="https://yutannihilation.github.io/estatapi/">estatapi</a>📦のREADMEを参考にしました．ただし，ここでは2023年データを使用．</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>正式にはメタ情報と呼ばれています．</p></li><li id="fn2"><p><a href="https://yutannihilation.github.io/estatapi/">estatapi</a>📦のREADMEを参考にしました．</p></li></ol></aside></section>
 <section id="jpstatの使い方-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データ項目を抽出">3. データ項目を抽出</h3>
@@ -593,7 +598,7 @@ UchidaMizuki
 <section id="jpstatの使い方-6" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">jpstat📦の使い方📌</h2>
 <h3 id="データを整形">5. データを整形</h3>
-<p><code>rekey(), select()</code>で収集データの列名を指定できる</p>
+<p><code>rekey(), select()</code>で収集データの列を指定できる</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11" data-code-line-numbers="2,4,7,9,12"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb11-1" class="hljs-ln-code"><a href="#cb11-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">estat</span>(<span class="at">statsDataId =</span> <span class="st">"0003343671"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2" class="hljs-ln-code"><a href="#cb11-2"></a>  <span class="fu">activate</span>(tab) <span class="sc">|&gt;</span> <span class="fu">select</span>() <span class="sc">|&gt;</span> <span class="co"># 何も`select()`しない場合は列が消える</span></span>
